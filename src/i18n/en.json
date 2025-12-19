@@ -1,0 +1,10 @@
+{
+  "title": "Weather forecast",
+  "loading": "Loading weather...",
+  "min": "Min",
+  "max": "Max",
+  "feelsLike": "Feels like",
+  "humidity": "Humidity",
+  "wind": "Wind",
+  "clouds": "Cloudiness"
+}

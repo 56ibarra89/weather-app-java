@@ -1,0 +1,10 @@
+{
+  "title": "Pronóstico del clima",
+  "loading": "Cargando clima...",
+  "min": "Mín",
+  "max": "Máx",
+  "feelsLike": "Sensación térmica",
+  "humidity": "Humedad",
+  "wind": "Viento",
+  "clouds": "Nubosidad"
+}
