@@ -17,7 +17,7 @@ export const getTodayWeatherByCity = async (lat, lon, lang = 'en') => {
   return {
     city: response.data.city.name,
     country: response.data.city.country,
-    forecast: response.data.list.slice(0, 4),
+    forecast: response.data.list,
   }
 }
 
@@ -37,6 +37,6 @@ export const getWeatherByCityName = async (city, lang = 'en') => {
   return {
     city: response.data.city.name,
     country: response.data.city.country,
-    forecast: response.data.list.slice(0, 4),
+    forecast: response.data.list,
   }
 }

@@ -6,5 +6,6 @@
   "feelsLike": "Feels like",
   "humidity": "Humidity",
   "wind": "Wind",
-  "clouds": "Cloudiness"
+  "clouds": "Cloudiness",
+  "fiveDayForecast": "5-Day Forecast"
 }

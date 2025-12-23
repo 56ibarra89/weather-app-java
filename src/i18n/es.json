@@ -6,5 +6,6 @@
   "feelsLike": "Sensación térmica",
   "humidity": "Humedad",
   "wind": "Viento",
-  "clouds": "Nubosidad"
+  "clouds": "Nubosidad",
+  "fiveDayForecast": "Pronóstico de 5 días"
 }
