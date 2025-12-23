@@ -1,8 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import {
-  getTodayWeatherByCity,
-  getWeatherByCityName,
-} from './weatherService'
+import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
+import { getTodayWeatherByCity, getWeatherByCityName } from './weatherService'
+import { extractApiErrorMessage } from './errors'
 
 /**
  * 🔹 Clima por coordenadas (CitySelector)
@@ -13,10 +11,7 @@ export const fetchWeather = createAsyncThunk(
     try {
       return await getTodayWeatherByCity(lat, lon, lang)
     } catch (error) {
-      const message =
-        error?.response?.data?.message ||
-        error?.message ||
-        'Error fetching weather data'
+      const message = extractApiErrorMessage(error, 'Error fetching weather data')
       return thunkAPI.rejectWithValue(message)
     }
   }
@@ -31,10 +26,7 @@ export const fetchWeatherByCityName = createAsyncThunk(
     try {
       return await getWeatherByCityName(city, lang)
     } catch (error) {
-      const message =
-        error?.response?.data?.message ||
-        error?.message ||
-        'City not found'
+      const message = extractApiErrorMessage(error, 'City not found')
       return thunkAPI.rejectWithValue(message)
     }
   }
@@ -58,33 +50,27 @@ const weatherSlice = createSlice({
   extraReducers: builder => {
     builder
 
-      // 🔹 Coordenadas
-      .addCase(fetchWeather.pending, state => {
-        state.isLoading = true
-        state.error = null
-      })
-      .addCase(fetchWeather.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.data = action.payload
-      })
-      .addCase(fetchWeather.rejected, (state, action) => {
-        state.isLoading = false
-        state.error = action.payload
-      })
-
-      // 🔹 Nombre de ciudad
-      .addCase(fetchWeatherByCityName.pending, state => {
-        state.isLoading = true
-        state.error = null
-      })
-      .addCase(fetchWeatherByCityName.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.data = action.payload
-      })
-      .addCase(fetchWeatherByCityName.rejected, (state, action) => {
-        state.isLoading = false
-        state.error = action.payload
-      })
+      .addMatcher(
+        isAnyOf(fetchWeather.pending, fetchWeatherByCityName.pending),
+        state => {
+          state.isLoading = true
+          state.error = null
+        }
+      )
+      .addMatcher(
+        isAnyOf(fetchWeather.fulfilled, fetchWeatherByCityName.fulfilled),
+        (state, action) => {
+          state.isLoading = false
+          state.data = action.payload
+        }
+      )
+      .addMatcher(
+        isAnyOf(fetchWeather.rejected, fetchWeatherByCityName.rejected),
+        (state, action) => {
+          state.isLoading = false
+          state.error = action.payload ?? action.error?.message ?? 'Unexpected error'
+        }
+      )
   },
 })
 
