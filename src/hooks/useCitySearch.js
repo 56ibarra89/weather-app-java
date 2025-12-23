@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchWeather,
@@ -15,11 +15,14 @@ export const useCitySearch = () => {
     state => state.language.currentLanguage
   )
 
-  const filteredCities = query
-    ? CITIES.filter(city =>
-        city.name.toLowerCase().startsWith(query.toLowerCase())
-      )
-    : CITIES
+  const filteredCities = useMemo(() => {
+    const normalized = query.trim().toLowerCase()
+    if (!normalized) return CITIES
+
+    return CITIES.filter(city =>
+      city.name.toLowerCase().startsWith(normalized)
+    )
+  }, [query])
 
   const searchCity = () => {
     const trimmed = query.trim()
