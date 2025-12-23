@@ -5,6 +5,7 @@ import AirIcon from '@mui/icons-material/Air'
 import CloudQueueIcon from '@mui/icons-material/CloudQueue'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import MetricItem from './MetricItem'
 
 const WeatherCard = () => {
   const { t } = useTranslation()
@@ -67,51 +68,32 @@ const WeatherCard = () => {
         {/* INFO SECUNDARIA */}
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5, color: '#fff' }}>
-              <ThermostatIcon fontSize="small" sx={{ color: '#fff' }} />
-              <Typography variant="body2" sx={{ color: '#fff' }}>
-                {t('feelsLike')}
-              </Typography>
-            </Box>
-            <Typography variant="h6">
-              {Math.round(current.main.feels_like)}°C
-            </Typography>
+            <MetricItem
+              icon={<ThermostatIcon fontSize="small" sx={{ color: '#fff' }} />}
+              label={t('feelsLike')}
+              value={`${Math.round(current.main.feels_like)}°C`}
+            />
           </Grid>
-
           <Grid item xs={6}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5, color: '#fff' }}>
-              <WaterDropIcon fontSize="small" sx={{ color: '#fff' }} />
-              <Typography variant="body2" sx={{ color: '#fff' }}>
-                {t('humidity')}
-              </Typography>
-            </Box>
-            <Typography variant="h6">
-              {current.main.humidity}%
-            </Typography>
+            <MetricItem
+              icon={<WaterDropIcon fontSize="small" sx={{ color: '#fff' }} />}
+              label={t('humidity')}
+              value={`${current.main.humidity}%`}
+            />
           </Grid>
-
           <Grid item xs={6}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5, color: '#fff' }}>
-              <AirIcon fontSize="small" sx={{ color: '#fff' }} />
-              <Typography variant="body2" sx={{ color: '#fff' }}>
-                {t('wind')}
-              </Typography>
-            </Box>
-            <Typography variant="h6">
-              {current.wind.speed} m/s
-            </Typography>
+            <MetricItem
+              icon={<AirIcon fontSize="small" sx={{ color: '#fff' }} />}
+              label={t('wind')}
+              value={`${current.wind.speed} m/s`}
+            />
           </Grid>
-
           <Grid item xs={6}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5, color: '#fff' }}>
-              <CloudQueueIcon fontSize="small" sx={{ color: '#fff' }} />
-              <Typography variant="body2" sx={{ color: '#fff' }}>
-                {t('clouds')}
-              </Typography>
-            </Box>
-            <Typography variant="h6">
-              {current.clouds.all}%
-            </Typography>
+            <MetricItem
+              icon={<CloudQueueIcon fontSize="small" sx={{ color: '#fff' }} />}
+              label={t('clouds')}
+              value={`${current.clouds.all}%`}
+            />
           </Grid>
         </Grid>
       </CardContent>
