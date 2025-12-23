@@ -16,7 +16,7 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  width: 320,
+  width: '100%',
 }))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({

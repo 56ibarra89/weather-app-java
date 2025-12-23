@@ -3,17 +3,22 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import CitySearch from './CitySearch'
+import LanguageSwitcher from '../components/LanguageSwitcher'
 
 const SearchBar = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ width: '100%' }}>
+      <AppBar position="static" sx={{ borderRadius: 2, mb: 2 }}>
         <Toolbar sx={{ gap: 2 }}>
           <Typography variant="h6" noWrap>
             Weather App
           </Typography>
 
-          <CitySearch />
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+            <CitySearch />
+          </Box>
+
+          <LanguageSwitcher />
         </Toolbar>
       </AppBar>
     </Box>
