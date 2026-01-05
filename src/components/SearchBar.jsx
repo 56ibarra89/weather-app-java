@@ -14,7 +14,7 @@ const SearchBar = () => {
             Weather App
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ flexGrow: 1 }}>
             <CitySearch />
           </Box>
 
