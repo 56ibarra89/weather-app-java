@@ -1,6 +1,7 @@
 {
   "title": "Pronóstico del clima",
   "loading": "Cargando clima...",
+  "searchPrompt": "Busca una ciudad para ver el clima.",
   "min": "Mín",
   "max": "Máx",
   "feelsLike": "Sensación térmica",
